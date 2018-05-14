@@ -1,0 +1,96 @@
+Message queue service, to store messages while waiting for another service to consume/process them.
+
+A queue is a temporary repository to store messages.
+
+Messages can be of size up to 256KB.
+
+Queue can handle auto scaling as well failover.
+Helps in decoupling.
+- Max number of domains per account 100
+- Visibility Time out : 30s(default) - 12hours.
+- The minimum visibility timeout for an SQS message is 0 seconds. There is no way to decrease that value.
+ChangeMessageVisibilty API.
+- Can offer FIFO queues. Messages are delivered exactly once.
+- Max retention time of an sqs message - 14days. Default is 4 days
+- Billing according to 64kb chunks. 256kb message is treated as 4 requests
+- Long polling is better than short polling. 20s default maximum
+- An SQS message can be delivered multiple times.
+- Batch operations (SendMessageBatch, DeleteMessageBatch, and ChangeMessageVisibilityBatch) all cost the same as other Amazon SQS requests.
+- PurgeQueue - to clear the SQS message queue all at once
+- SentTimestamp attribute can be used to calculate time-in-queue value.
+
+SNS:
+
+Send notifications from cloud.
+Pub sub messaging paradigm
+
+No polling required
+SNS - Push
+SQS - Pull
+
+Topic is a subject. Anything published to the topic will send messages to the subscribers.
+You can delete an individual subscriber
+JSON formatted
+ChangeMessageVisibility - to extend the length of time to process the jobs
+Subscribers can be - Email, HTTPS, HTTP, SQS, Email json
+You can customize protocol type for SNS messages.
+Tokens sent for subscription confirmation is valid for 3 days
+
+SWF:
+Makes it easy to work across distributed application components. By co-ordinating tasks.
+
+Worker and a decider will help in the workflow.
+Humans cannot make decisions
+A task is assigned only once to a worker.
+1yr max task retention time.
+Task oriented service unlike message oriented.
+Synchronous. Delivery order guaranteed.
+
+Elastic Beanstalk:
+It provisions aws resources.
+Free.
+
+CloudFormation:
+- Free. IaaS or IaaC
+- Helps to provision and also provides version to the infrastructure.
+- No restriction on number of templates.
+	200 stacks per account can be requested for increase.
+	60 Parameters / Outputs per template.
+- if Cloud Formation encounters an error. It will terminate and rollback all resources created on failure. You are charged for errors.
+
+- Invalid JSON syntax will cause an error message during template validation. Since the stack will never start creating, there is nothing to roll back
+
+To output data:
+Fn:GetAtt
+
+WaitCondition is supported to have stacks to wait while creation.
+
+There is no limit to the number of CloudFormation Templates per Region.
+
+Shared Responsibility Model:
+--Infrastructure Services
+--Container Services
+--Abstracted Services (ex: dynamodb, s3, lambda)
+
+The visibility timeout is the time during which the message is invisible to workers. If this interval is set to '0', the message will be immediately available for processing.
+
+Which section of a CloudFormation template allows you to set up differing instance types based on environment type (e.g. 'Production' or 'QA')? -- Conditions
+The Resources section is the only required section. It specifies the stack resources and their properties.
+
+True or False: an SQS request can contain up to 20 individual messages, as long as the total size of the request does not exceed 256KB. -- False. 10. 
+
+True or False: in addition to XML, JSON, and unformatted text, an SQS message may contain certain Unicode characters. -- True
+
+Your EC2 instance receives a message from SQS and the visibility timeout begins. Which API operation must be called to prevent the message from becoming visible again? DeleteMessage
+
+True or False: The failure of an Availability Zone will result in the loss of an SNS message originating in that AZ. -- False. Failover of az's will kick in
+
+While working with the SQS API, your application returns HTTP status code 400. Which of the following errors might explain this result? -- MissingAction and MissingParameter would return a 400 HTTP status code. The others would return a 403.
+
+To send messages larger than 256 KB, you can use the Amazon SQS Extended Client Library for Java. This library allows you to send an Amazon SQS message that contains a reference to a message payload in Amazon S3.
+
+How many message queues in sqs ? -- unlimited
+
+In an sqs message: Has following items - Name, type, value, message body (None of them can Null)
+
+Software can be installed during stack creation process of CF. -- True. AWS provides bootstrapping scripts which can be run

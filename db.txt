@@ -1,0 +1,99 @@
+RDS
+-- Relational Db
+-- 6 (SOMPAM)
+Dynamo
+-- NoSQL
+-- DynamoDb
+Elasticache
+-- Caching service. In memmory cached in the cloud. Quick retrieval
+---- Memcached
+---- Redis
+Redshift
+-- Online Analytics Processing
+DMS
+--DB migration to AWS. Schema conversion tool
+
+DynamoDB
+
+Stored on SSD storage
+-Eventual Consistent
+-Strongly Consistent
+You cannot select a specific Availability Zone in which to place your DynamoDB Table.
+Tables
+Items -> ROW
+Attributes -> COLUMNS
+
+Pricing is by Throughput AND Storage
+
+Primary Key:
+-- Single Attribute (Partition Key)
+-- Composite (Partition Key and Sort Key)
+
+Indexes:
+Local Secondary Index
+--(Same partition Key, different sort key)
+-- Created at Table Creation
+Global Secondary Index
+--(Different partition Key, different sort key)
+-- Create at or after Table Creation
+
+Streams:
+Use to capture any modification of the DynamoDB table
+Stored for 24 hours
+You can use triggers to handle these streams
+
+Query:
+Finds using only primary key. Optionally sort key attribute can be provided.
+
+ProjectionExpression can be used to restrict number of attributes/specific attributes returned.
+By default sorted by sortKey. Else by Ascending Order. If needed to be changed use ScanIndexForward to false
+
+Scan:
+Basically dumping the whole table
+
+Query is better than for Scan. Obvious reasons
+DynamoDB does not support complex relational queries (e.g. joins) or complex transactions. 
+
+Conditional Updates - Idempotent
+Atomic Counters
+
+BatchWriteItem ?? -- The BatchWriteItem operation puts or deletes multiple items in one or more tables. When called in a loop, it also checks for unprocessed items and submits a new BatchWriteItem request with those unprocessed items until all items have been processed.
+
+Provisioned Throughput Limits can be requested to increase via a limit
+
+Which API call would you use to query an item by its primary key? GetItem
+
+True or false: DynamoDB supports cross-table joins. -- False
+
+DynamoDB uses optimistic concurrency control. T/F -- True
+
+In DynamoDB, what is the maximum length of a partition key value? -- 2048 bytes
+The minimum length of a sort key value is 1 byte. The maximum length is 1024 bytes
+DynamoDB supports nested attributes up to 32 levels deep.
+
+Although GETS, UPDATES, and DELETES of items in Dynamo DB consume capacity units, updating the table via the UpdateTable API call consumes no capacity units. -- True. Although it accounts for the throughput
+
+BatchGetItem - A single BatchGetItem operation can retrieve a maximum of 100 items. The total size of all the items retrieved cannot exceed 16 MB.
+BatchWriteItem - A single BatchWriteItem operation can contain up to 25 PutItem or DeleteItem requests. The total size of all the items written cannot exceed 16 MB.
+
+One DynamoDB read capacity unit is equal to one strongly consistent read per second T/F. -- True
+
+Dynamo use Eventual read consistency which is default
+
+A composite key comprising hash and range keys is the same thing as a composite key comprising partition and sort keys.
+
+Which of the following DynamoDB API calls does not consume capacity units? UpdateTable
+
+True or False: You can define a maximum of 5 local secondary indexes and 5 global secondary indexes per DynamoDB table. -- True. No increase request allowed.
+
+What is the primary advantage of a conditional write? -- With a conditional write, an operation succeeds only if the item attributes meet one or more expected conditions.
+
+Which of the following DynamoDB write operations allow conditional writes? -- Update, Put, Delete Item
+
+True or False: While the UpdateTable operation is executing, the table status changes from ACTIVE to UPDATING, and you cannot issue another UpdateTable request until the table returns to the ACTIVE state. -- True
+
+The numbers of S3 buckets per account and DynamoDB tables per account can be increased by AWS Support. --  256 tables per user/ per region. -- 100 buckets per user
+
+What is the maximum limit for size of an item ? -- 10gb
+
+Smallest amount of reserved capacity that can be purchased? -- 100 units

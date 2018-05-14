@@ -1,0 +1,118 @@
+S3:
+Object based storage
+0 - 5TB file size
+5gb max file size through PUT
+S3 URL --- http://{bucket_name}.s3-{region}.amazonaws.com/{object}
+Updates to s3 are atomic:
+-- old data or new data but never partial data.
+-- Read after Write for PUTS of new objects
+-- Eventual consistency for PUTS overwrites and DELETES(some delay)
+
+Objects consist of:
+Key, Value, Metadata, Version Id, Subresources (ACL, Torrent)
+
+Storage Tiers:
+S3 - 11 9's 
+S3 - IA (Infrequently accessed) - Lower fee but rapid access, there is a retrieval fee.
+Reduced Redundancy Storage - Durability and availabilty of objects over a given year.
+Glacier - Very cheap but for archival. 3-5 hrs to restore
+
+S3-Standard provides 99.99% availability and eleven-nines durability. S3-RRS provides 99.99% durability
+
+While creating:
+-Versioning
+-Logging
+-Tags
+
+By default all buckets are private. We will get access denied. To prevent "Make public".
+Go to properties to set properties for individual objects.
+Bucket policies and ACL are used to change security and logging for buckets/objects
+
+Encryption in S3:
+When objects are uploaded they can be either encrypted or not.
+By default it's AES256
+--- Transit - SSL
+--- At Rest:
+------ Server Side Encryption (S3 managed, AWS KMS, Customer provided keys)
+	--x-amz-server-side-encryption is used to initiate server-side encryption.
+------ Client Side Encryption
+
+Static Website Hosting:
+Https://{bucket_name}.s3-website-{region}.amazonaws.com
+--- configure a landing page and error page
+--- grant public read access
+--- no dynamic rendering
+--- CORS configuration is important. 
+
+- Bucket Policy helps make all objects public in a bucket.
+- You can use access control mechanisms such as bucket policies and Access Control Lists (ACLs) to selectively grant permissions to users and groups of users. 
+- If s3 has to interact with APIG, then you must have CORS enabled.
+
+Versioning:
+---
+once enabled cannot be disabled, but only suspended. Git like behavior.
+In order for Cross Region Replication to work on a bucket, you should enable versioning. While doing it we can change the storage class, if we are using it as just back up. History objects/ existing objects won't be replicated while doing this, only the subsequent ones will be. Regions must be unique while doing this. No daisy chaining of replication.
+Changing Permissions won't be copied and deleting a delete marker won't be replicating either.
+---
+
+
+Management -> Lifecycle -> Lifecycle rule.
+
+CDN: System of distributed servers that deliver webpages and content based on geo locations of user, origin of webpage and cdn.
+
+
+Network -> CF -> Create Distribution.
+Two types
+Geo restriction 
+Invalidation : killing caching at edge locations abruptly before the ttl expires, will be charged.
+
+Storage Gateway:
+Back up data to s3
+4 types:
+-File Interface - Network File System like. Max file size is 5tb
+-Volume Interface(Stored(512tb) and Cached(1pb))
+-Tape Interface (Virtual Tape Library and Virtual Tape Shelf(in Glacier))
+
+Snowball:
+Petabyte scale transfer data in and out of AWS
+- Standard
+--- 80tb. Storage only
+- Edge
+--- 100tb. Storage and compute capacity. Like a private aws data center.
+- Snowmobile
+--- PB and exabyte data transfer service Perfect for Data Center migration
+
+S3 bucket names may only contain only lower case letters, periods, numbers, and dashes. Bucket names must not be formatted as an IP address, and they may not begin with a period.
+
+InvalidObjectState corresponds to HTTP Status Code 403. All others correspond to HTTP Status Code 400.
+
+x-amz-delete-marker, x-amz-id-2, and x-amz-request-id are all common S3 response headers. Please familiarize yourself with the S3 API Reference document prior to the exam
+
+If you want to enable a user to download your private data directly from S3, you can insert a pre-signed URL into a web page before giving it to your user.
+
+AWS recommends that you use Multipart Upload for files larger than __100mb___.
+
+While working with the S3 API, you receive an error: 400 Bad Request. Which of the following error codes Can explain this error? -- Everything except InvalidObjectState
+
+You need to maximize upload performance. How in s3? -- Multipart and Transfer Acceleration?
+
+True or False: S3 does not support website redirects. False
+
+True or False: You can stop and restart a multi-part upload. True
+
+The only SNS notification event supported by S3 is S3:ReducedRedundancyLostObject. T/F. 
+-- False. Notifications are also available for HTTP PUT and POST, S3 copy actions, and S3 CompleteMultipartUpload.
+
+S3 bucket names may only contain only lower case letters, periods, numbers, and dashes.
+T/F -- True
+
+You are working with the S3 API and receive an error: 409 Conflict. What is a possible cause of this error? --- BucketNotEmpty. Cannot delete a non empty bucket or BucketAlreadyExists
+
+True or False: The parts of a multi-part upload will not be reassembled until the CompleteMultipartUpload operation is called. -- True
+
+True or False: there is a cost associated with transferring from Amazon S3 to an EC2 instance in the same Region. -- False
+
+True or False: An account may have an absolute maximum of 100 S3 buckets. -- False. You know Why?
+
+If you want to upload an object of size 6gb, you receive "limit exceeds max allowed object size", what will you do? -- MultiObjectUpload. 3 step process. Initiate, upload and complete.
+

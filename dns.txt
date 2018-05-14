@@ -1,0 +1,40 @@
+DNS:
+
+Domain Name Server. Look up IP addresses.
+An ELB only has dns name, not IP address.
+TTL - how long the dns record after a request is cached locally. Lower TTL makes the changes to dns records take faster to propagate.
+Cname: canonical name. Can be used to resolve one domain name to another.
+
+Choose Alias record over cname( cheaper as well as maps to naked domain name)
+
+Always must have NS records and Start Of Authority Records for any record set
+5 types of routing policies. Simple, Weighted, Latency, Failover, Geolocation
+
+VPC:
+Virtual Data Centre in the cloud.
+Easily customizable
+VPC Diagram. 1 internet gateway per vpc only.
+VPC peering. No transitive peering allowed.
+
+Subnets are not created when a VPC is created unlike, route tables, NACLS, Security Groups.When you create new subnets within a custom VPC, by default they can communicate with each other, across availability zones.
+On subnet level NACL will act as a firewall, on an instance level SG will act as a firewall.
+Add an elastic IP address to the new instance if it cannot access internet from a subnet
+Security groups don't span across vpc's.
+
+NAT Instances:
+You can get it from community ami
+NAT instance vs NAT Gateways. FAQs
+
+NACLs vs SG:
+A ACL can be associated with many subnets.
+Each subnet in the VPC must be associated with one NACL, if not it gets a default.
+1 internet gateway can be attached to a custom vpc.
+
+VPC Flow Logs:
+Logging network traffic
+
+Both VPC and Auto-Scaling services are offered at no direct cost. Charges will be incurred, however, for the underlying compute or storage resources.
+
+By default, how many Elastic IP addresses are you limited to per region? -- 5
+
+There can be only 1 Route table per subnet

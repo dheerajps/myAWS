@@ -1,0 +1,103 @@
+EC2:
+
+Provides resizable compute capacity in the cloud. Provides auto scaling based on computing requirements.
+Pay per use.
+Options:
+--- On Demand (/hr, /sec)
+	-- first time
+	-- short time
+--- Reserved (contract per 1yr, 3 yr)
+	-- steady and predictable usage
+	-- upfront payments
+	-- standard and convertible and scheduled RI's	
+	-- It is possible to transfer a reserved instance from one Availability Zone to another.
+--- Spot (bid price and spot price)
+	-- flexible start and end times
+	-- feasible at low compute prices
+--- Dedicated hosts
+	-- great for licensing
+	-- used for regulatory requirements
+
+Types:
+10 as of now
+Dr Mc GIFT PX
+Command to get instance metadata: curl "http://169.254.169.254/latest/meta-data/public-ipv4" -- This will give both public and private IP
+
+EBS:
+Create storage volumes.
+
+If you make an AMI public, this AMI is not immediately available across all regions, by default, to do this the AMI must be copied to that other region first.
+
+Attaching disks to your VM's. Block based storage. ATTACH TO EC2 Instances.
+GP SSD, PIOPS SSD, Throughput Optimized HDD, Cold HDD, Magnetic.
+
+EC2 dies, EBS volume can be scheduled to be terminated as well. They persist independently.
+
+With EC2, you can have 2 types of storage: EBS or Instance Store. 
+-- EBS is persistent, and if an EC2 instance is stopped with an EBS volume attached, there will be no data lost. 
+-- Instance Store is ephemeral and if the EC2 instance is stopped, all data will be lost. This is expensive.
+
+Root volume types can't be encrypted. Will be deleted when instance gets terminated. Delete On Terminate flag to "N" if you want your Amazon EBS volume to persist outside the life of the instance.
+
+EC2 AND EBS must be in the same AZ.
+
+Cannot modify volume for standard GP SSD.
+You can create a volume using an existing snapshot. And the second one can be present in a different AZ, but that has to be attached to an ec2 of the same AZ.
+
+AWS doesn't recommend that EC2 instances have credentials stored on them so that the instances can access other resources (such as S3 buckets).
+
+Snapshots are a point in time copy of volumes. They exist in s3.
+
+Frequent snapshots are not recommended, as they can result in performance degradation. Additionally, these snapshots will not capture users' unsaved data that lives in the instance's memory.
+
+Web identity federation removes the need for creating individual IAM users. Instead, users can sign in to an identity provider and then obtain temporary security credentials from the AWS Security Token Service.
+
+Security Groups:
+- Virtual Firewall
+- Stateful. 
+- Inbound addition will add to outbound as well.
+- An instance can have many SG. You cannot deny anything at a SG, but only allow. Same SG can be attached to any number of instances.
+- You cannot block specific IPs using SG, instead use NACL
+
+EFS: 
+- File storage service. Cannot mount 2 ebs volumes to an instance at once. Use EFS for this. 
+- Centralized repository for ec-2 instances.
+- Amazon EFS is compatible with all Amazon EC2 instance types and is accessible from Linux-based AMIs
+
+Lambda:
+
+- Compute service. One set of code, multiple invocations & responding to multiple requests. 
+- Server-less. Can scale automatically. Can have different triggers. 
+- Priced based per request & Duration.
+- lambda exec time should be <5min, default is 3s
+
+
+ELB:
+
+- Classic: that routes traffic based on either application or network level information.
+- Application ELB : that routes traffic based on advanced application level information that includes the content of the request.
+
+No public IP for ELB, just dns name, so you can associate an ec2 instance behind it.
+
+Health checks check instance health by constant scheduled pinging.
+You cannot have multiple SSL certificates (for multiple domain names) on a single Elastic Load Balancer.
+
+What is the Uptime SLA for Amazon EC2 and EBS within a given region? 99.95%
+
+You need to attach an EBS volume to an EC2 instance. Which API call should you use? -- AttachVolume
+
+True or False: You can use your existing Microsoft Windows Server licenses with an Amazon EC2 shared tenancy instance -- False. You need a dedicated host
+
+Amazon EC2 is used jointly with Amazon S3 for instances with root devices backed by local instance storage. 
+
+When you stop an instance, we shut it down but don't charge hourly usage for a stopped instance, or data transfer fees, but we do charge for the storage for any Amazon EBS volumes. 
+
+RunInstances, DescribeInstances, TerminateInstances, StopInstances, StartInstances -- Do their corresponding actions
+
+What would result in the allocation of maximum amount of computing resources CPU power for AWS Lambda function? -- Higher the memory more is the CPU power.
+
+After you create an AMI, you can keep it private so that only you can use it, or you can share it with a specified list of AWS accounts.
+
+DescribeImages - to describe an Amazon AMI
+
+You should retain the data by taking snapshots of the EBS volumes backing your instances and sell the instances on the Reserved Instance Marketplace. -- If you need to recoup costs of a suspended RI project and you need to save data for future use.
