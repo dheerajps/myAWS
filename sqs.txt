@@ -60,6 +60,8 @@ CloudFormation:
 
 - Invalid JSON syntax will cause an error message during template validation. Since the stack will never start creating, there is nothing to roll back
 
+- Example Mapping : { "Fn::FindInMap" : [ "RegionMap", { "Ref" : "AWS::Region" }, "32"]}
+
 To output data:
 Fn:GetAtt
 
