@@ -97,3 +97,5 @@ The numbers of S3 buckets per account and DynamoDB tables per account can be inc
 What is the maximum limit for size of an item ? -- 10gb
 
 Smallest amount of reserved capacity that can be purchased? -- 100 units
+
+Control plane operations let you create and manage DynamoDB tables. They also let you work with indexes, streams, and other objects that are dependent on tables. In contrast, Data plane operations let you perform create, read, update, and delete (also called CRUD) actions on data in a table
