@@ -39,7 +39,7 @@ Tokens sent for subscription confirmation is valid for 3 days
 SWF:
 Makes it easy to work across distributed application components. By co-ordinating tasks.
 
-Worker and a decider will help in the workflow.
+Worker and a decider will help in the workflow. Workflow starter is the first task of the workflow.
 Humans cannot make decisions
 A task is assigned only once to a worker.
 1yr max task retention time.
@@ -96,3 +96,5 @@ How many message queues in sqs ? -- unlimited
 In an sqs message: Has following items - Name, type, value, message body (None of them can Null)
 
 Software can be installed during stack creation process of CF. -- True. AWS provides bootstrapping scripts which can be run
+
+SNS message to endpoints have - Message, Signature, Subject, Type in JSON format

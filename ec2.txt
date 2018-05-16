@@ -101,3 +101,11 @@ After you create an AMI, you can keep it private so that only you can use it, or
 DescribeImages - to describe an Amazon AMI
 
 You should retain the data by taking snapshots of the EBS volumes backing your instances and sell the instances on the Reserved Instance Marketplace. -- If you need to recoup costs of a suspended RI project and you need to save data for future use.
+
+AWS service to record logs of all your AWS API calls -  CloudTrail
+CloudWatch - Monitoring metrics and performance
+CloudTrial - auditing
+
+For penetration testing fill out an AWS request. Only allowed for ec2 and ads instances.
+
+True or False: Classic ELBs support IPv6 as well as IPv4. -- False, only ipv4 as of now
