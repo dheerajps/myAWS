@@ -109,3 +109,9 @@ CloudTrial - auditing
 For penetration testing fill out an AWS request. Only allowed for ec2 and ads instances.
 
 True or False: Classic ELBs support IPv6 as well as IPv4. -- False, only ipv4 as of now
+
+Policy evaluation logic flow diagram is helpful
+
+If you do not ensure that DNS is re-resolved or use multiple test clients to simulate increased load, the test may continue to hit a single IP address when Elastic Load Balancing has actually allocated many more IP addresses.
+
+Encryption of an existing EBS volume - encryption at OS level

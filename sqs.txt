@@ -34,7 +34,9 @@ JSON formatted
 ChangeMessageVisibility - to extend the length of time to process the jobs
 Subscribers can be - Email, HTTPS, HTTP, SQS, Email json
 You can customize protocol type for SNS messages.
-Tokens sent for subscription confirmation is valid for 3 days
+Tokens sent for subscription confirmation is valid for 3 days.
+CreatePlatformEnpoint API is used to register a new endpoint.
+CreateTopic, DeleteTopic, AddPermission and ListSubscriptionsByTopic are some of the owner allowed options
 
 SWF:
 Makes it easy to work across distributed application components. By co-ordinating tasks.
@@ -49,6 +51,7 @@ Synchronous. Delivery order guaranteed.
 Elastic Beanstalk:
 It provisions aws resources.
 Free.
+Works with ec2, ads, elbowing, s3, sns. Doesn't work with sqs, route53, elb.
 
 CloudFormation:
 - Free. IaaS or IaaC
@@ -95,6 +98,16 @@ How many message queues in sqs ? -- unlimited
 
 In an sqs message: Has following items - Name, type, value, message body (None of them can Null)
 
+While working with an SQS API - MissingAction and MissingParameter would return a 400 HTTP status code. The others would return a 403.
+
 Software can be installed during stack creation process of CF. -- True. AWS provides bootstrapping scripts which can be run
 
 SNS message to endpoints have - Message, Signature, Subject, Type in JSON format
+
+Protocols supported by sqs, tls 1.0,1.1,1.2
+
+10million subscriptions per topic and 100000 topics per account in SNS.
+
+Max length of a topic name in SNS: -- 256characters
+
+Max number of topics allowed per account in SNS? --
