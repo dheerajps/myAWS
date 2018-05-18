@@ -115,3 +115,5 @@ Policy evaluation logic flow diagram is helpful
 If you do not ensure that DNS is re-resolved or use multiple test clients to simulate increased load, the test may continue to hit a single IP address when Elastic Load Balancing has actually allocated many more IP addresses.
 
 Encryption of an existing EBS volume - encryption at OS level
+
+Size limit for EBS backed instance is 16tb, instance backed store is 10gb

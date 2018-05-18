@@ -12,7 +12,7 @@ Helps in decoupling.
 ChangeMessageVisibilty API.
 - Can offer FIFO queues. Messages are delivered exactly once.
 - Max retention time of an sqs message - 14days. Default is 4 days
-- Billing according to 64kb chunks. 256kb message is treated as 4 requests
+- Billing according to 64kb chunks. 256kb message is treated as 4 requests. mIn is 1kb and max is 256kb
 - Long polling is better than short polling. 20s default maximum
 - An SQS message can be delivered multiple times.
 - Batch operations (SendMessageBatch, DeleteMessageBatch, and ChangeMessageVisibilityBatch) all cost the same as other Amazon SQS requests.
@@ -47,6 +47,7 @@ A task is assigned only once to a worker.
 1yr max task retention time.
 Task oriented service unlike message oriented.
 Synchronous. Delivery order guaranteed.
+Migrating components from datacenter to the cloud is a best use case for SWF
 
 Elastic Beanstalk:
 It provisions aws resources.
@@ -64,6 +65,8 @@ CloudFormation:
 - Invalid JSON syntax will cause an error message during template validation. Since the stack will never start creating, there is nothing to roll back
 
 - Example Mapping : { "Fn::FindInMap" : [ "RegionMap", { "Ref" : "AWS::Region" }, "32"]}
+
+- Example Select :  { "Fn::Select" : [ "1", [ "apples", "grapes", "oranges", "mangoes" ] ] }. Returns single object from a list of objects by index.
 
 To output data:
 Fn:GetAtt
@@ -96,9 +99,7 @@ To send messages larger than 256 KB, you can use the Amazon SQS Extended Client 
 
 How many message queues in sqs ? -- unlimited
 
-In an sqs message: Has following items - Name, type, value, message body (None of them can Null)
-
-While working with an SQS API - MissingAction and MissingParameter would return a 400 HTTP status code. The others would return a 403.
+In an sqs message: Has following items - Name, type, value, message body (None of them can be Null)
 
 Software can be installed during stack creation process of CF. -- True. AWS provides bootstrapping scripts which can be run
 
@@ -110,4 +111,8 @@ Protocols supported by sqs, tls 1.0,1.1,1.2
 
 Max length of a topic name in SNS: -- 256characters
 
-Max number of topics allowed per account in SNS? --
+Max number of topics allowed per account in SNS? -- 100000. 10millon subs per topic
+
+You can have a maximum of 10,000 workflow and activity types (in total) that are either registered or deprecated in each domain. You can have a maximum of 100 Amazon SWF domains (including registered and deprecated domains) in your AWS account. 
+
+ListStacks API call returns summary information for stacks whose status matches StackStatusFilter

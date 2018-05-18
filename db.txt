@@ -52,7 +52,9 @@ Scan:
 Basically dumping the whole table
 
 Query is better than for Scan. Obvious reasons
-DynamoDB does not support complex relational queries (e.g. joins) or complex transactions. 
+DynamoDB does not support complex relational queries (e.g. joins) or complex transactions.
+
+You can specify an expression as part of the Query API call to filter results based on values of primary keys on a table using the KeyConditionExpression parameter. 
 
 Conditional Updates - Idempotent
 Atomic Counters
@@ -94,8 +96,12 @@ True or False: While the UpdateTable operation is executing, the table status ch
 
 The numbers of S3 buckets per account and DynamoDB tables per account can be increased by AWS Support. --  256 tables per user/ per region. -- 100 buckets per user
 
-What is the maximum limit for size of an item ? -- 10gb
+What is the maximum limit for size of an item ? -- 400kb
+
+The result set from a Scan and a Query is limited to 1 MB per call. You can use the LastEvaluatedKey from the scan response to retrieve more results.
 
 Smallest amount of reserved capacity that can be purchased? -- 100 units
 
 Control plane operations let you create and manage DynamoDB tables. They also let you work with indexes, streams, and other objects that are dependent on tables. In contrast, Data plane operations let you perform create, read, update, and delete (also called CRUD) actions on data in a table
+
+A single DynamoDB table partition can support a maximum of 3,000 read capacity units or 1,000 write capacity units. When you create a new table, the initial number of partitions can be expressed as follows:(readCapacityUnits / 3,000 ) + ( writeCapacityUnits / 1,000 ) = initialPartitions (rounded up)
