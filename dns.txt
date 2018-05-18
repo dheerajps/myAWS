@@ -38,3 +38,7 @@ Both VPC and Auto-Scaling services are offered at no direct cost. Charges will b
 By default, how many Elastic IP addresses are you limited to per region? -- 5
 
 There can be only 1 Route table per subnet
+
+All subnets in an AmazonVPC have routes to all other subnets
+
+You can have 200 subnets / vpc 

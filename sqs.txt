@@ -116,3 +116,11 @@ Max number of topics allowed per account in SNS? -- 100000. 10millon subs per to
 You can have a maximum of 10,000 workflow and activity types (in total) that are either registered or deprecated in each domain. You can have a maximum of 100 Amazon SWF domains (including registered and deprecated domains) in your AWS account. 
 
 ListStacks API call returns summary information for stacks whose status matches StackStatusFilter
+
+can only have a maximum of 1,000 open activity tasks per workflow execution
+
+Amazon SWF manages your workflow execution history and other details of your workflows across 3 availability zones so that your applications can continue to rely on Amazon SWF even if there are failures in one availability zone.
+
+To get Public IP -- AWS:EC2::EIP
+
+AWS Flow Framework is a programming framework that enables you to develop Amazon SWF-based applications quickly a

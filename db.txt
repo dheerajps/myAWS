@@ -105,3 +105,5 @@ Smallest amount of reserved capacity that can be purchased? -- 100 units
 Control plane operations let you create and manage DynamoDB tables. They also let you work with indexes, streams, and other objects that are dependent on tables. In contrast, Data plane operations let you perform create, read, update, and delete (also called CRUD) actions on data in a table
 
 A single DynamoDB table partition can support a maximum of 3,000 read capacity units or 1,000 write capacity units. When you create a new table, the initial number of partitions can be expressed as follows:(readCapacityUnits / 3,000 ) + ( writeCapacityUnits / 1,000 ) = initialPartitions (rounded up)
+
+Although all reads from a DynamoDB table are eventually consistent by default, strongly consistent reads can be specified.
