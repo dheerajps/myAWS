@@ -123,4 +123,7 @@ Amazon SWF manages your workflow execution history and other details of your wor
 
 To get Public IP -- AWS:EC2::EIP
 
-AWS Flow Framework is a programming framework that enables you to develop Amazon SWF-based applications quickly a
+AWS Flow Framework is a programming framework that enables you to develop Amazon SWF-based applications quickly.
+
+ListStackResources - To list all resources in a CF stack
+Describe-stacks -  all info about your running stacks
