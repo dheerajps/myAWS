@@ -107,3 +107,5 @@ Control plane operations let you create and manage DynamoDB tables. They also le
 A single DynamoDB table partition can support a maximum of 3,000 read capacity units or 1,000 write capacity units. When you create a new table, the initial number of partitions can be expressed as follows:(readCapacityUnits / 3,000 ) + ( writeCapacityUnits / 1,000 ) = initialPartitions (rounded up)
 
 Although all reads from a DynamoDB table are eventually consistent by default, strongly consistent reads can be specified.
+
+IncompleteSignature and InvalidParameterValue will return an HTTP Status code of 400. The other will return an HTTP status code of 403.

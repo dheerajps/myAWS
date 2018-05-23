@@ -117,3 +117,5 @@ True or False: An account may have an absolute maximum of 100 S3 buckets. -- Fal
 If you want to upload an object of size 6gb, you receive "limit exceeds max allowed object size", what will you do? -- MultiObjectUpload. 3 step process. Initiate, upload and complete.
 
 A benefit of multi part upload is that you can upload a file as it is being created, before knowing the final object size.
+
+Using IPv6 support for Amazon S3, applications can connect to Amazon S3 without needing any IPv6 to IPv4 translation software or systems.

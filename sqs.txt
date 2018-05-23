@@ -12,7 +12,7 @@ Helps in decoupling.
 ChangeMessageVisibilty API.
 - Can offer FIFO queues. Messages are delivered exactly once.
 - Max retention time of an sqs message - 14days. Default is 4 days
-- Billing according to 64kb chunks. 256kb message is treated as 4 requests. mIn is 1kb and max is 256kb
+- Billing according to 64kb chunks. 256kb message is treated as 4 requests. Min is 1kb and max is 256kb
 - Long polling is better than short polling. 20s default maximum
 - An SQS message can be delivered multiple times.
 - Batch operations (SendMessageBatch, DeleteMessageBatch, and ChangeMessageVisibilityBatch) all cost the same as other Amazon SQS requests.
@@ -52,7 +52,7 @@ Migrating components from datacenter to the cloud is a best use case for SWF
 Elastic Beanstalk:
 It provisions aws resources.
 Free.
-Works with ec2, ads, elbowing, s3, sns. Doesn't work with sqs, route53, elb.
+Works with ec2, autoscaling, rds, elb, s3, sns. Doesn't work with sqs, route53, elastic IP.
 
 CloudFormation:
 - Free. IaaS or IaaC
